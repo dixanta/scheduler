@@ -2,10 +2,11 @@
 
 
 $lang['schedule_id'] = 'Schedule Id';
-$lang['content_id'] = 'Content Id';
-$lang['fanpage_id'] = 'Fanpage Id';
-$lang['post_date'] = 'Post Date';
-$lang['is_posted'] = 'Is Posted';
+$lang['schedule_name'] = 'Schedule Name';
+$lang['time_zone'] = 'Time Zone';
+$lang['created_date'] = 'Created Date';
+$lang['is_repeat'] = 'Is Repeat';
+$lang['status'] = 'Status';
 
 $lang['create_schedule']='Create Schedule';
 $lang['edit_schedule']='Edit Schedule';

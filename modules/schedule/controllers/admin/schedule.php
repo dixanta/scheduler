@@ -22,9 +22,8 @@ class Schedule extends Admin_Controller
 	public function json()
 	{
 		$this->_get_search_param();	
-		$this->schedule_model->joins=array('CONTENTS','FANPAGES');
 		$total=$this->schedule_model->count();
-		paging('schedule_id desc');
+		paging('schedule_id');
 		$this->_get_search_param();	
 		$rows=$this->schedule_model->getSchedules()->result_array();
 		echo json_encode(array('total'=>$total,'rows'=>$rows));
@@ -36,8 +35,9 @@ class Schedule extends Admin_Controller
 		parse_str($this->input->post('data'),$params);
 		if(!empty($params['search']))
 		{
-			($params['search']['content_id']!='')?$this->db->where('schedules.content_id',$params['search']['content_id']):'';
-			($params['search']['fanpage_id']!='')?$this->db->where('schedules.fanpage_id',$params['search']['fanpage_id']):'';
+			($params['search']['schedule_name']!='')?$this->db->like('schedule_name',$params['search']['schedule_name']):'';
+(isset($params['search']['is_repeat']))?$this->db->where('is_repeat',$params['search']['is_repeat']):'';
+(isset($params['search']['status']))?$this->db->where('status',$params['search']['status']):'';
 
 		}  
 
@@ -90,11 +90,18 @@ class Schedule extends Admin_Controller
 
         if(!$this->input->post('schedule_id'))
         {
+			$data['created_date']=date('Y-m-d H:i:s');
             $success=$this->schedule_model->insert('SCHEDULES',$data);
+			
+			$schedule_id=$this->db->insert_id();
+			$this->insert_timing($this->input->post('time'),$schedule_id);
+
         }
         else
         {
             $success=$this->schedule_model->update('SCHEDULES',$data,array('schedule_id'=>$data['schedule_id']));
+			$this->schedule_model->delete('SCHEDULE_TIMINGS',array('schedule_id'=>$data['schedule_id']));
+			$this->insert_timing($this->input->post('time'),$data['schedule_id']);			
         }
         
 		if($success)
@@ -111,24 +118,28 @@ class Schedule extends Admin_Controller
 		 echo json_encode(array('msg'=>$msg,'success'=>$success));		
         
 	}
+	
+	private function insert_timing($time_array,$schedule_id)
+	{
+			foreach($time_array as $time_key=>$time_value)
+			{
+				foreach($time_value as $t)
+				{
+					if($t!=''){
+						$timing_data=array('schedule_id'=>$schedule_id,'day'=>$time_key,'time'=>$t);
+						$this->schedule_model->insert('SCHEDULE_TIMINGS',$timing_data);
+					}
+				}
+			}	
+	}
    
    private function _get_posted_data()
    {
    		$data=array();
         $data['schedule_id'] = $this->input->post('schedule_id');
-		$data['content_id'] = $this->input->post('content_id');
-		$data['fanpage_id'] = $this->input->post('fanpage_id');
-		$data['post_date'] = $this->input->post('post_date');
+		$data['schedule_name'] = $this->input->post('schedule_name');
 		$data['is_repeat'] = $this->input->post('is_repeat');
-		$data['time'] = $this->input->post('time');
-		$days=($this->input->post('sunday'))?"1":"0";
-		$days.=($this->input->post('monday'))?"1":"0";
-		$days.=($this->input->post('tuesday'))?"1":"0";
-		$days.=($this->input->post('wedday'))?"1":"0";
-		$days.=($this->input->post('thursday'))?"1":"0";
-		$days.=($this->input->post('friday'))?"1":"0";
-		$days.=($this->input->post('saturday'))?"1":"0";
-		$data['days']=$days;
+		$data['status'] = $this->input->post('status');
 
         return $data;
    }
