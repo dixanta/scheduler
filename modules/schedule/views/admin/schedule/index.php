@@ -3,16 +3,11 @@
 <div id="search-panel" class="easyui-panel" data-options="title:'<?php  echo lang('schedule_search')?>',collapsible:true,iconCls:'icon-search'" style="padding:5px">
 <form action="" method="post" id="schedule-search-form">
 <table width="100%" border="1" cellspacing="1" cellpadding="1">
-<tr><td><label><?php echo lang('content_id')?></label>:</td>
-<td><input type="text" name="search[content_id]" id="search_content_id"  class="easyui-numberbox"/></td>
+<tr>
 <td><label><?php echo lang('fanpage_id')?></label>:</td>
 <td><input type="text" name="search[fanpage_id]" id="search_fanpage_id"  class="easyui-numberbox"/></td>
-</tr>
-<tr>
 <td><label><?php echo lang('post_date')?></label>:</td>
 <td><input type="text" name="date[post_date][from]" id="search_post_date_from"  class="easyui-datebox"/> ~ <input type="text" name="date[post_date][to]" id="search_post_date_to"  class="easyui-datebox"/></td>
-</tr>
-<tr>
 </tr>
   <tr>
     <td colspan="4">
@@ -29,13 +24,11 @@
     <thead>
     <th data-options="field:'checkbox',checkbox:true"></th>
     <th data-options="field:'schedule_id',sortable:true" width="20">Id</th>
-<th data-options="field:'content_title',sortable:true" width="50">Content Title</th>
 <th data-options="field:'facebook_page_name',sortable:true" width="100">Facebook Page</th>
 <th data-options="field:'post_date',sortable:true" width="50"><?php echo lang('post_date')?></th>
 <th data-options="field:'is_repeat',sortable:true,formatter:formatStatus" width="50" align="center">
 Repeat</th>
-<th data-options="field:'time',sortable:true" width="50" align="center">
-Repeat Time</th>
+
 <th data-options="field:'report',sortable:false,formatter:formatReport" width="50" align="center">
 Report</th>
     <th field="action" width="100" formatter="getActions"><?php  echo lang('action')?></th>
@@ -56,14 +49,13 @@ Report</th>
     <form id="form-schedule" method="post" >
     <table>
 		<tr>
-		              <td width="34%" ><label><?php echo lang('content_id')?>:</label></td>
-					  <td width="66%"><input name="content_id" id="content_id"  required="true"></td>
+
 		       
 		              <td width="34%" ><label><?php echo lang('fanpage_id')?>:</label></td>
 					  <td width="66%"><input name="fanpage_id" id="fanpage_id"  required="true"></td>
-		       </tr><tr>
+		       
 		              <td width="34%" ><label><?php echo lang('post_date')?>:</label></td>
-					  <td width="66%" colspan="3"><input name="post_date" id="post_date" class="easyui-datetimebox" required="true"></td>
+					  <td width="66%" colspan="3"><input name="post_date" id="post_date" class="easyui-datetimebox"></td>
 		       </tr><tr>
 		              <td width="34%" ><label>Repeat:</label></td>
 					  <td width="66%" colspan="3"><input type="radio" value="1" name="is_repeat" id="is_repeat1" /><?php echo lang("general_yes")?> 
