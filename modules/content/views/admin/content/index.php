@@ -9,12 +9,6 @@
 <td><input type="text" name="date[added_date][from]" id="search_added_date_from"  class="easyui-datebox"/> ~ <input type="text" name="date[added_date][to]" id="search_added_date_to"  class="easyui-datebox"/></td>
 </tr>
 <tr>
-<td><label><?php echo lang('link')?></label>:</td>
-<td><input type="text" name="search[link]" id="search_link"  class="easyui-validatebox"/></td>
-<td><label><?php echo lang('text')?></label>:</td>
-<td><input type="text" name="search[text]" id="search_text"  class="easyui-validatebox"/></td>
-</tr>
-<tr>
 <td><label><?php echo lang('status')?></label>:</td>
 <td><input type="radio" name="search[status]" id="search_status1" value="1"/><?php echo lang('general_yes')?>
 									<input type="radio" name="search[status]" id="search_status0" value="0"/><?php echo lang('general_no')?></td>
@@ -36,9 +30,8 @@
     <th data-options="field:'content_id',sortable:true" width="30"><?php echo lang('content_id')?></th>
 <th data-options="field:'content_title',sortable:true" width="50"><?php echo lang('content_title')?></th>
 <th data-options="field:'added_date',sortable:true" width="50"><?php echo lang('added_date')?></th>
-<th data-options="field:'image',sortable:true,formatter:formatImage" width="50" ><?php echo lang('image')?></th>
-<th data-options="field:'link',sortable:true" width="50"><?php echo lang('link')?></th>
-<th data-options="field:'text',sortable:true" width="50"><?php echo lang('text')?></th>
+<th data-options="field:'content',sortable:true" width="50" >Content</th>
+<th data-options="field:'type',sortable:true" width="50" >Type</th>
 <th data-options="field:'status',sortable:true,formatter:formatStatus" width="30" align="center"><?php echo lang('status')?></th>
 
     <th field="action" width="100" formatter="getActions"><?php  echo lang('action')?></th>

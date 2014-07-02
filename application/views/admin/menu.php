@@ -5,6 +5,8 @@
 		<a href="javascript:void(0)" id="menu-system-button" class="easyui-menubutton" menu="#system-menu" iconCls="icon-system"><?php echo lang('system_menu')?></a>
 <?php endif;?>
         <a href="<?php echo site_url('content/admin/content')?>" id="menu-system-button" class="easyui-linkbutton" plain="true" iconCls="icon-content">Content</a>
+        <a href="<?php echo site_url('fanpage/admin/fanpage')?>" id="menu-system-button" class="easyui-linkbutton" plain="true" iconCls="icon-content">Fan Page</a>
+
         <a href="javascript:void(0)" id="menu-design-button" class="easyui-menubutton" menu="#design-menu" iconCls="icon-content">Design</a>        
         <a href="<?php echo site_url('schedule/admin/schedule')?>" id="menu-schedule-button" class="easyui-linkbutton" plain="true" iconCls="icon-extension">Schedule</a>        
         <?php if($this->facebook->getUser()){?>
