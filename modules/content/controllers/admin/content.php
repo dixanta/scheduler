@@ -121,9 +121,8 @@ protected $uploadthumbpath= 'uploads/content/thumb/';
    		$data=array();
         $data['content_id'] = $this->input->post('content_id');
 $data['content_title'] = $this->input->post('content_title');
-$data['image'] = $this->input->post('image');
-$data['link'] = $this->input->post('link');
-$data['text'] = $this->input->post('text');
+$data['content'] = $this->input->post('content');
+$data['type'] = $this->input->post('type');
 $data['status'] = $this->input->post('status');
 
         return $data;

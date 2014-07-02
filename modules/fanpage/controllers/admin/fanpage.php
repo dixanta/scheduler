@@ -2,12 +2,14 @@
 
 class Fanpage extends Admin_Controller
 {
+    protected $uploadPath = 'uploads/pictures';
+    protected $uploadthumbpath= 'uploads/pictures/thumb/';
 	
 	public function __construct(){
     	parent::__construct();
         $this->load->module_model('fanpage','fanpage_model');
         $this->lang->module_load('fanpage','fanpage');
-        //$this->bep_assets->load_asset('jquery.upload'); // uncomment if image ajax upload
+        $this->bep_assets->load_asset('jquery.upload'); // uncomment if image ajax upload
     }
     
 	public function index()
@@ -82,6 +84,7 @@ class Fanpage extends Admin_Controller
             endforeach;
 		}
 	}    
+    
 
 	public function save()
 	{
@@ -126,6 +129,44 @@ class Fanpage extends Admin_Controller
         return $data;
    }
    
-   	
+   
+   	function upload_image(){
+		//Image Upload Config
+		$config['upload_path'] = $this->uploadPath;
+		$config['allowed_types'] = 'gif|png|jpg';
+		$config['max_size']	= '102400';
+		$config['remove_spaces']  = true;
+		//load upload library
+		$this->load->library('upload', $config);
+        //print_r($_FILES);
+        //exit;
+		if(!$this->upload->do_upload())
+		{
+			$data['error'] = $this->upload->display_errors('','');
+			echo json_encode($data);
+		}
+		else
+		{
+		  $data = $this->upload->data();
+ 		  $config['image_library'] = 'gd2';
+		  $config['source_image'] = $data['full_path'];
+          $config['new_image']    = $this->uploadthumbpath;
+		  //$config['create_thumb'] = TRUE;
+		  $config['maintain_ratio'] = TRUE;
+		  $config['height'] =100;
+		  $config['width'] = 100;
+
+		  $this->load->library('image_lib', $config);
+		  $this->image_lib->resize();
+		  echo json_encode($data);
+	    }
+	}
+    
+    function upload_delete(){
+		//get filename
+		$filename = $this->input->post('filename');
+		@unlink($this->uploadPath . '/' . $filename);
+        @unlink($this->uploadthumbpath . '/' . $filename);    
+	} 
 	    
 }
