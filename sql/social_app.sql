@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.12
+-- version 3.5.2.2
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 02, 2014 at 11:28 AM
--- Server version: 5.6.16
--- PHP Version: 5.5.11
+-- Generation Time: Jul 03, 2014 at 07:55 AM
+-- Server version: 5.5.27
+-- PHP Version: 5.4.7
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -305,7 +305,7 @@ CREATE TABLE IF NOT EXISTS `be_users` (
 --
 
 INSERT INTO `be_users` (`id`, `username`, `password`, `email`, `active`, `group`, `activation_key`, `last_visit`, `created`, `modified`) VALUES
-(1, 'admin', '23c84a18ccc4dfda823dc4ed5bfe1eb58d99c76f', 'ruman_ranjit@yahoo.com', 1, 2, NULL, '2014-07-02 10:49:16', '2014-06-23 16:35:59', NULL);
+(1, 'admin', '23c84a18ccc4dfda823dc4ed5bfe1eb58d99c76f', 'ruman_ranjit@yahoo.com', 1, 2, NULL, '2014-07-02 12:10:32', '2014-06-23 16:35:59', NULL);
 
 -- --------------------------------------------------------
 
@@ -452,18 +452,21 @@ CREATE TABLE IF NOT EXISTS `tbl_contents` (
   `type` enum('Link','Photo','Post') NOT NULL,
   `added_date` datetime NOT NULL,
   `status` tinyint(4) NOT NULL,
+  `fanpage_id` int(11) NOT NULL,
   PRIMARY KEY (`content_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `tbl_contents`
 --
 
-INSERT INTO `tbl_contents` (`content_id`, `content_title`, `content`, `type`, `added_date`, `status`) VALUES
-(1, 'Facebook', '', 'Link', '2014-06-23 17:52:24', 1),
-(2, 'Facebook Automation Test', '', 'Link', '2014-06-24 10:18:44', 1),
-(3, 'imdb', '', 'Link', '2014-06-24 12:10:05', 1),
-(4, 'hello', '', 'Link', '2014-06-26 10:10:23', 1);
+INSERT INTO `tbl_contents` (`content_id`, `content_title`, `content`, `type`, `added_date`, `status`, `fanpage_id`) VALUES
+(1, 'Facebook', '', 'Link', '2014-06-23 17:52:24', 1, 0),
+(2, 'Facebook Automation Test', '', 'Link', '2014-06-24 10:18:44', 1, 0),
+(3, 'imdb', '', 'Link', '2014-06-24 12:10:05', 1, 0),
+(4, 'hello', '', 'Link', '2014-06-26 10:10:23', 1, 0),
+(5, 'my post', '', 'Post', '2014-07-02 13:47:40', 1, 0),
+(6, 'My link', 'www.facebook.com', 'Link', '2014-07-02 13:49:58', 1, 0);
 
 -- --------------------------------------------------------
 
